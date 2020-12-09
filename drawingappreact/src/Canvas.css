@@ -1,0 +1,16 @@
+.canvas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+}
+.post {
+    right: 0;
+    bottom: 0;
+     position: absolute;
+     color: green;
+     font-size: 30px;
+     padding: 25px;
+     cursor: pointer;
+}
