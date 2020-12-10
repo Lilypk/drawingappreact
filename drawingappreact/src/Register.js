@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./Login.css";
+import "./Register.css";
 
-class Login extends Component {
+class Register extends Component {
   constructor(props) {
     super();
   }
@@ -9,18 +9,18 @@ class Login extends Component {
   render() {
     console.log(this.props.data);
     return (
-      <div className="login">
-          {/* <div className='loginforms'>
-      <form>
+      <div className="register">
+{/* <div className='registerforms'>
+<form>
   <label>
-    username:
+    create username:
     <input type="text" name="name" />
   </label>
   <input type="submit" value="Submit" />
 </form>
 <form>
   <label>
-    password:
+    create password:
     <input type="text" name="name" />
   </label>
   <input type="submit" value="Submit" />
@@ -31,4 +31,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;
