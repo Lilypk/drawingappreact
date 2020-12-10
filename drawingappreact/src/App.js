@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import './App.css';
 import Homepage from './Homepage';
 import Feed from './Feed';
@@ -19,64 +20,77 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    fetch("https://drawingapp-capstone.herokuapp.com/", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((output) => this.setState({ homeJson: output }));
+   
 
-    fetch("https://drawingapp-capstone.herokuapp.com/register", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((output) => this.setState({ registerJson: output }));
+    // fetch("https://drawingapp-capstone.herokuapp.com/register", {
+    //   headers: {
+    //     Accept: "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((output) => this.setState({ registerJson: output }));
 
-    fetch("https://drawingapp-capstone.herokuapp.com/login", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((output) => this.setState({ loginJson: output }));
+    // fetch("https://drawingapp-capstone.herokuapp.com/login", {
+    //   headers: {
+    //     Accept: "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((output) => this.setState({ loginJson: output }));
       
-    fetch("https://drawingapp-capstone.herokuapp.com/feed", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((output) => this.setState({ feedJson: output }));
-    fetch("https://drawingapp-capstone.herokuapp.com/user", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((output) => this.setState({ userJson: output }));
-    fetch("https://drawingapp-capstone.herokuapp.com/canvas", {
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((output) => this.setState({ canvasJson: output }));
+    // fetch("https://drawingapp-capstone.herokuapp.com/feed", {
+    //   headers: {
+    //     Accept: "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((output) => this.setState({ feedJson: output }));
+    // fetch("https://drawingapp-capstone.herokuapp.com/user", {
+    //   headers: {
+    //     Accept: "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((output) => this.setState({ userJson: output }));
+    // fetch("https://drawingapp-capstone.herokuapp.com/canvas", {
+    //   headers: {
+    //     Accept: "application/json",
+    //   },
+    // })
+    //   .then((response) => response.json())
+    //   .then((output) => this.setState({ canvasJson: output }));
   }
   
   
   render () {
     return (
     <div className="App">
-     
+      <div>
+     <BrowserRouter>
+     <Switch>
+       
+      
+      <Route path='/register'>
+      <Register data={this.state.registerJson} />
+      </Route>
+      <Route path='/login'>
+      <Login data={this.state.loginJson}/>
+      </Route>
+      <Route path='/feed'>
+      <Feed data={this.state.feedJson}/>
+      </Route>
+      <Route path='/user'>
+      <User data={this.state.userJson}/>
+      </Route>
+      <Route path='/canvas'>
+      <Canvas data={this.state.canvasJson}/>
+      </Route>
+      <Route path='/'>
       <Homepage />
-      <Register />
-      <Login />
-      <Feed />
-      <User />
-      <Canvas />
+      </Route>
+      </Switch>
+      </BrowserRouter>
+      </div>
     </div>
     
   );

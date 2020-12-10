@@ -5,3 +5,9 @@
     align-items: center;
     margin-top: 100px;
 }
+.submit {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    cursor: pointer;
+}

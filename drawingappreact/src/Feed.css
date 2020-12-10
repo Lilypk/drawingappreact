@@ -19,4 +19,14 @@
   bottom: 8px;
   right: 16px;
 }
-
+.logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: green;
+    font-size: 20px;
+}
+body {
+    background-color: aquamarine;
+}

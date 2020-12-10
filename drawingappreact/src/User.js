@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./User.css";
-
+import {Link} from 'react-router-dom'
 class User extends Component {
   constructor(props) {
     super();
@@ -10,11 +10,13 @@ class User extends Component {
    
     return (
       <div className="user">
-          {/* <div className='newdrawingfeed'>
-          <div className='newdrawing'>new drawing</div>
-      <div className='feed'>feed</div>
+        <div className='logo'>DAYDOODLE</div>
+        <div className='feednewdrawing'><Link to = '/canvas'>new drawing</Link></div>
+          <div className='newdrawingfeed'>
+          
+      <div className='feed'><Link to = '/feed'>feed</Link></div>
 </div>
-<div className='logout'>logout</div>  */}
+<div className='logout'>logout</div> 
       </div>
     );
   }
