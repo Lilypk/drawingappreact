@@ -6,6 +6,19 @@ class Register extends Component {
     super();
   }
 
+handleAuthTrue = () => {
+
+}
+handleAuthFalse = () => {
+   
+}
+
+handleSubmit = (req, res) => {
+    
+    
+    console.log('user is logged in')
+    console.log(req.user)
+}
   render() {
     console.log(this.props.data);
     return (
@@ -16,15 +29,13 @@ class Register extends Component {
     create username:
     <input type="text" name="name" />
   </label>
-  {/* <input type="submit" value="Submit" /> */}
 </form>
 <form>
   <label>
     create password:
     <input type="text" name="name" />
   </label>
-  {/* <input type="submit" value="Submit" /> */}
-  <div className='submit'><Link to = '/feed'>submit</Link></div>
+    <div type='text' onClick={this.handleSubmit} className='submit'><Link to = '/feed'>submit</Link></div>
 </form>
 </div>
       </div>

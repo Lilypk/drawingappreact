@@ -16,7 +16,7 @@ class User extends Component {
           
       <div className='feed'><Link to = '/feed'>feed</Link></div>
 </div>
-<div className='logout'>logout</div> 
+<div className='logout'><Link to = '/'>logout</Link></div> 
       </div>
     );
   }

@@ -5,7 +5,12 @@ class Login extends Component {
   constructor(props) {
     super();
   }
-
+  handleSubmit = (req, res) => {
+    
+    
+    console.log('user is logged in')
+    console.log(req.user)
+}
   render() {
     console.log(this.props.data);
     return (
@@ -16,15 +21,13 @@ class Login extends Component {
     username:
     <input type="text" name="name" />
   </label>
-  {/* <input type="submit" value="Submit" /> */}
 </form>
 <form>
   <label>
     password:
     <input type="text" name="name" />
   </label>
-  {/* <input type="submit" value="Submit" /> */}
-  <div className='submit'><Link to = '/feed'>submit</Link></div>
+  <div type='text' onClick={this.handleSubmit} className='submit'><Link to = '/feed'>submit</Link></div>
 </form>
 </div>
       </div>

@@ -14,7 +14,7 @@ class Feed extends Component {
         <div className='logo'>DAYDOODLE</div>
         <div className='feednewdrawing'><Link to = '/canvas'>new drawing</Link></div>
       <div className='feedprofile'><Link to = '/user'>profile</Link></div>
-      <div className='logout'>logout</div>
+      <div className='logout'><Link to = '/'>logout</Link></div>
       </div>
     );
   }
