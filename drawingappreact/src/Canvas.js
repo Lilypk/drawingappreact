@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./Canvas.css";
 import ReactDOM from "react-dom";
 import CanvasDraw from "react-canvas-draw";
-
 class Canvas extends Component {
   constructor(props) {
     super(props);
@@ -10,13 +9,15 @@ class Canvas extends Component {
       color: "#ffc600",
       width: 600,
       height: 600,
-      brushRadius: 10,
-      lazyRadius: 12,
+      brushRadius: 4,
+      lazyRadius: 4,
+      caption: ''
     };
   }
   handleCanvasStoring = () => {
-    const dataURL = CanvasDraw.toDataURL();
-    console.log(dataURL);
+    // let canvas={canvasDraw}
+    // let dataURL = canvasDraw.toDataURL();
+    // console.log(dataURL);
   };
   componentDidMount() {
     // change the color randomly every 2 seconds
@@ -73,12 +74,15 @@ class Canvas extends Component {
             hideGrid
             ref={(canvasDraw) => (this.loadableCanvas = canvasDraw)}
             saveData={localStorage.getItem("savedDrawing")}
+   
           />
-          <form onSubmit={this.handleCanvasStoring}>
+          <form onSubmit={this.handleCanvasStoring} >
             <label>
-              add caption:
+              caption:
               <input type="text" name="caption" />
+
             </label>
+            
             <button
               className="post"
               onClick={() => {
@@ -90,6 +94,7 @@ class Canvas extends Component {
             >
               post
             </button>
+           
           </form>
         </div>
       </div>

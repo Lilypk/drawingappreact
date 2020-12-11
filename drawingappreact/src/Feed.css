@@ -30,3 +30,9 @@
 body {
     background-color: aquamarine;
 }
+.finishedcanvas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
