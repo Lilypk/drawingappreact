@@ -5,29 +5,50 @@ class Login extends Component {
   constructor(props) {
     super();
   }
-  handleSubmit = (req, res) => {
+ 
     
     
-    console.log('user is logged in')
-    console.log(req.user)
-}
+    handleSubmit = (e) => {
+        e.preventDefault()
+        console.log('user is logged in')
+        console.log(e)
+       console.log(e.target[0].value)
+    
+     fetch("https://drawingapp-capstone.herokuapp.com/login", {
+         method: "POST",
+         credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(
+          {username:e.target[0].value, password:e.target[1].value})
+        })
+    
+          .then((response) => response.json())
+          .then((output) => this.setState({ loginJson: output }));
+        
+    }
+    
+    
+
   render() {
     console.log(this.props.data);
     return (
       <div className="login">
           <div className='loginforms'>
-      <form>
+          <form onSubmit={this.handleSubmit}>
   <label>
     username:
-    <input type="text" name="name" />
+    <input type="text" name="username" />
   </label>
-</form>
-<form>
+
+
   <label>
     password:
-    <input type="text" name="name" />
+    <input type="text" name="password" />
   </label>
-  <div type='text' onClick={this.handleSubmit} className='submit'><Link to = '/feed'>submit</Link></div>
+    <button type='text'  className='submit'>submit </button>
 </form>
 </div>
       </div>

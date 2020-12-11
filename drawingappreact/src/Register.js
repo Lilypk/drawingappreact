@@ -32,7 +32,7 @@ handleSubmit = (e) => {
 
       .then((response) => response.json())
       .then((output) => this.setState({ registerJson: output }));
-    
+      
 }
 
 

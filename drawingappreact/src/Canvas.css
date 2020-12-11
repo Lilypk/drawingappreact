@@ -3,10 +3,27 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 200px;
+    margin-top: 100px;
 }
 .post {
      color: green;
      font-size: 30px;
      cursor: pointer;
+     border: none;
+     text-decoration: none;
+     background-color: aquamarine;
+}
+.clear {
+    color: green;
+     font-size: 30px;
+     cursor: pointer;
+     border: none;
+     text-decoration: none;
+     background-color: aquamarine;
+}
+.clear:hover {
+    background-color: white;
+}
+.post:hover {
+    background-color: white;
 }
