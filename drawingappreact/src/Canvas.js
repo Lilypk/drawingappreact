@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Canvas.css";
 import ReactDOM from "react-dom";
 import CanvasDraw from "react-canvas-draw";
+import tree from './images/tree.jpeg'
 class Canvas extends Component {
   constructor(props) {
     super(props);
@@ -11,14 +12,51 @@ class Canvas extends Component {
       height: 600,
       brushRadius: 4,
       lazyRadius: 4,
-      caption: ''
+      caption: "",
+      drawings: [],
     };
   }
-  handleCanvasStoring = () => {
-    // let canvas={canvasDraw}
-    // let dataURL = canvasDraw.toDataURL();
-    // console.log(dataURL);
+  canvasString = (e) => {
+    e.preventDefault();
+    console.log(this.state.caption);
+    let canvasSelector = document
+      .querySelector("canvas")
+      .toDataURL();
+    let canvasDrawing = {
+      caption: this.state.caption,
+      drawing: canvasSelector,
+    };
+    // console.log(document.querySelector('canvas'))
+    fetch("https://drawingapp-capstone.herokuapp.com/canvas", {
+      method: "POST",
+      body: JSON.stringify(canvasDrawing),
+      headers: { 
+        "Content-Type": "application/json",
+        'Accept': 'application/json'
+      },
+      
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
+
+  // handleCanvasStoring = (e) => {
+  //   // e.preventDefault()
+  //   // console.log('here')
+  //   // let ctx = this.canvas.getContext('2d')
+  //   // let url = URL.createObjectURL(e.target.CanvasDraw)
+  //   // let img = new Image()
+
+  //   // img.src = url
+  //   // img.onload = function () {
+  //   //   console.log('!!!')
+  //   //   let dataImg = this.canvas.toDataURL()
+  //   //   console.log(dataImg)
+  //   //   ctx.drawImage(img, 0, 0, 600, 600, 0, 0, 200, 200)
+  //   }
+
+  // };
+
   componentDidMount() {
     // change the color randomly every 2 seconds
     window.setInterval(() => {
@@ -26,6 +64,10 @@ class Canvas extends Component {
         color: "#" + Math.floor(Math.random() * 16777215).toString(16),
       });
     }, 2000);
+    fetch("https://drawingapp-capstone.herokuapp.com/canvas")
+      .then((res) => res.json())
+      .then((data) => this.setState({ drawings: data }));
+      
   }
 
   render() {
@@ -69,33 +111,44 @@ class Canvas extends Component {
             lazyRadius={this.state.lazyRadius}
           />
 
-          <CanvasDraw
+          {/* <CanvasDraw
+            id="myCanvas"
             disabled
             hideGrid
             ref={(canvasDraw) => (this.loadableCanvas = canvasDraw)}
             saveData={localStorage.getItem("savedDrawing")}
-   
-          />
-          <form onSubmit={this.handleCanvasStoring} >
+          /> */}
+          <button onClick={() => this.canvasString()}>canvas</button>
+          <form>
             <label>
               caption:
-              <input type="text" name="caption" />
-
+              <input
+                onChange={(e) => this.setState({ caption: e.target.value })}
+                type="text"
+                name="caption"
+                value={this.state.caption}
+              />
             </label>
-            
+
             <button
+              onClick={(e) => this.canvasString(e)}
+              type="submit"
               className="post"
-              onClick={() => {
-                localStorage.setItem(
-                  "savedDrawing",
-                  this.saveableCanvas.getSaveData()
-                );
-              }}
             >
               post
             </button>
-           
           </form>
+          <div>
+            {this.state.drawings.map((drawing, i) => (
+              <div key={i}>
+
+                <h1>caption: </h1> {drawing.caption}
+                <div  >
+                  <img className='imageDiv' src= {drawing.drawing} />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );

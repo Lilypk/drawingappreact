@@ -6,24 +6,28 @@
     margin-top: 100px;
 }
 .post {
-     color: green;
+     color: #174328;
      font-size: 30px;
      cursor: pointer;
      border: none;
      text-decoration: none;
-     background-color: aquamarine;
+     background-color: transparent;
 }
 .clear {
-    color: green;
+    color: #174328;
      font-size: 30px;
      cursor: pointer;
      border: none;
      text-decoration: none;
-     background-color: aquamarine;
+     background-color: transparent;
 }
 .clear:hover {
     background-color: white;
 }
 .post:hover {
     background-color: white;
+}
+.imageDiv {
+    height: 400px;
+    width: 400px;
 }

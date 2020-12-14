@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "./Login.css";
 import {Link} from 'react-router-dom'
+import axios from 'axios'
+
+axios.defaults.withCredentials = true;
+
 class Login extends Component {
   constructor(props) {
     super();
@@ -14,8 +18,8 @@ class Login extends Component {
         console.log(e)
        console.log(e.target[0].value)
     
-     fetch("https://drawingapp-capstone.herokuapp.com/login", {
-         method: "POST",
+     axios.post("https://drawingapp-capstone.herokuapp.com/login", {
+        //  method: "POST",
          credentials: "include",
           headers: {
             Accept: "application/json",

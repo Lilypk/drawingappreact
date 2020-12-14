@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Register.css";
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 class Register extends Component {
   constructor(props) {
     super();
@@ -19,7 +20,7 @@ handleSubmit = (e) => {
     console.log(e)
    console.log(e.target[0].value)
 
- fetch("https://drawingapp-capstone.herokuapp.com/register", {
+ axios.post("https://drawingapp-capstone.herokuapp.com/register", {
      method: "POST",
      credentials: "include",
       headers: {
