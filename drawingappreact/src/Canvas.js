@@ -132,6 +132,7 @@ class Canvas extends Component {
 
             <button
               onClick={(e) => this.canvasString(e)}
+              
               type="submit"
               className="post"
             >
