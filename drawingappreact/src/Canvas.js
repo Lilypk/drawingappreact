@@ -25,28 +25,34 @@ class Canvas extends Component {
     }, 2000);
     fetch("https://drawingapp-capstone.herokuapp.com/canvas")
       .then((res) => res.json())
-      .then((data) => this.setState({ drawings: data }));
+      .then((data) => {
+        console.log(data)
+        this.setState({ drawings: data })
+      })
+      
+      
   }
 
   canvasString = (e) => {
     e.preventDefault();
     console.log(this.state.caption);
-    let canvasSelector = document.querySelector("canvas").toDataURL();
-    let canvasDrawing = {
-      caption: this.state.caption,
-      drawing: canvasSelector,
-    };
-    // console.log(document.querySelector('canvas'))
-    fetch("https://drawingapp-capstone.herokuapp.com/canvas", {
-      method: "POST",
-      body: JSON.stringify(canvasDrawing),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
+    let canvasSelector = document.querySelector("canvas")
+    console.log(canvasSelector)
+    // let canvasDrawing = {
+    //   caption: this.state.caption,
+    //   drawing: canvasSelector,
+    // };
+    // // console.log(document.querySelector('canvas'))
+    // fetch("https://drawingapp-capstone.herokuapp.com/canvas", {
+    //   method: "POST",
+    //   body: JSON.stringify(canvasDrawing),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => console.log(data));
   };
 
   handleDelete = (_id, e) => {
@@ -113,16 +119,7 @@ class Canvas extends Component {
           >
             Clear
           </button>
-          <button
-            onClick={() => {
-              localStorage.setItem(
-                "savedDrawing",
-                this.saveableCanvas.getSaveData()
-              );
-            }}
-          >
-            Save
-          </button>
+          
           <CanvasDraw
             ref={(canvasDraw) => (this.saveableCanvas = canvasDraw)}
             brushColor={this.state.color}
@@ -137,7 +134,16 @@ class Canvas extends Component {
             ref={(canvasDraw) => (this.loadableCanvas = canvasDraw)}
             saveData={localStorage.getItem("savedDrawing")}
           /> */}
-          {/* <button onClick={() => this.canvasString()}>canvas</button> */}
+       <button
+            onClick={() => {
+              localStorage.setItem(
+                "savedDrawing",
+                this.saveableCanvas.getSaveData()
+              );
+            }}
+          >
+            Save
+          </button>
           <form>
             <label>
               caption:
@@ -148,7 +154,7 @@ class Canvas extends Component {
                 value={this.state.caption}
               />
             </label>
-
+            
             <button
               onClick={(e) => this.canvasString(e)}
               type="submit"
@@ -162,13 +168,13 @@ class Canvas extends Component {
               <div key={i}>
                 <h1>caption: </h1> {drawing.caption}
                 <div>
-                  <CanvasDraw
+                  {/* <CanvasDraw
                     disabled
                     hideGrid
                     ref={(canvasDraw) => (this.loadableCanvas = canvasDraw)}
                     saveData={localStorage.getItem("savedDrawing")}
-                  />
-                  {/* <img className='imageDiv' src= {drawing.drawing} /> */}
+                  /> */}
+                  <img className='imageDiv' src= {drawing.drawing} />
                 </div>
               </div>
             ))}
