@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Canvas.css";
 import ReactDOM from "react-dom";
 import CanvasDraw from "react-canvas-draw";
-import tree from './images/tree.jpeg'
+import tree from "./images/tree.jpeg";
 class Canvas extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +11,7 @@ class Canvas extends Component {
       width: 600,
       height: 600,
       brushRadius: 4,
-      lazyRadius: 4,
+      lazyRadius: 8,
       caption: "",
       drawings: [],
     };
@@ -19,9 +19,7 @@ class Canvas extends Component {
   canvasString = (e) => {
     e.preventDefault();
     console.log(this.state.caption);
-    let canvasSelector = document
-      .querySelector("canvas")
-      .toDataURL();
+    let canvasSelector = document.querySelector("canvas").toDataURL();
     let canvasDrawing = {
       caption: this.state.caption,
       drawing: canvasSelector,
@@ -30,11 +28,10 @@ class Canvas extends Component {
     fetch("https://drawingapp-capstone.herokuapp.com/canvas", {
       method: "POST",
       body: JSON.stringify(canvasDrawing),
-      headers: { 
+      headers: {
         "Content-Type": "application/json",
-        'Accept': 'application/json'
+        Accept: "application/json",
       },
-      
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
@@ -67,7 +64,6 @@ class Canvas extends Component {
     fetch("https://drawingapp-capstone.herokuapp.com/canvas")
       .then((res) => res.json())
       .then((data) => this.setState({ drawings: data }));
-      
   }
 
   render() {
@@ -104,6 +100,16 @@ class Canvas extends Component {
           >
             Clear
           </button>
+          <button
+            onClick={() => {
+              localStorage.setItem(
+                "savedDrawing",
+                this.saveableCanvas.getSaveData()
+              );
+            }}
+          >
+            Save
+          </button>
           <CanvasDraw
             ref={(canvasDraw) => (this.saveableCanvas = canvasDraw)}
             brushColor={this.state.color}
@@ -132,7 +138,6 @@ class Canvas extends Component {
 
             <button
               onClick={(e) => this.canvasString(e)}
-              
               type="submit"
               className="post"
             >
@@ -142,10 +147,15 @@ class Canvas extends Component {
           <div>
             {this.state.drawings.map((drawing, i) => (
               <div key={i}>
-
                 <h1>caption: </h1> {drawing.caption}
-                <div  >
-                  <img className='imageDiv' src= {drawing.drawing} />
+                <div>
+                  <CanvasDraw
+                    disabled
+                    hideGrid
+                    ref={(canvasDraw) => (this.loadableCanvas = canvasDraw)}
+                    saveData={localStorage.getItem("savedDrawing")}
+                  />
+                  {/* <img className='imageDiv' src= {drawing.drawing} /> */}
                 </div>
               </div>
             ))}
