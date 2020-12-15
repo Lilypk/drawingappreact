@@ -16,6 +16,18 @@ class Canvas extends Component {
       drawings: [],
     };
   }
+  componentDidMount() {
+    // change the color randomly every 2 seconds
+    window.setInterval(() => {
+      this.setState({
+        color: "#" + Math.floor(Math.random() * 16777215).toString(16),
+      });
+    }, 2000);
+    fetch("https://drawingapp-capstone.herokuapp.com/canvas")
+      .then((res) => res.json())
+      .then((data) => this.setState({ drawings: data }));
+  }
+
   canvasString = (e) => {
     e.preventDefault();
     console.log(this.state.caption);
@@ -31,6 +43,19 @@ class Canvas extends Component {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
+  handleDelete = (_id, e) => {
+    console.log(_id);
+    fetch("https://drawingapp-capstone.herokuapp.com/canvas" + _id, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     })
       .then((res) => res.json())
@@ -53,18 +78,6 @@ class Canvas extends Component {
   //   }
 
   // };
-
-  componentDidMount() {
-    // change the color randomly every 2 seconds
-    window.setInterval(() => {
-      this.setState({
-        color: "#" + Math.floor(Math.random() * 16777215).toString(16),
-      });
-    }, 2000);
-    fetch("https://drawingapp-capstone.herokuapp.com/canvas")
-      .then((res) => res.json())
-      .then((data) => this.setState({ drawings: data }));
-  }
 
   render() {
     return (
@@ -124,7 +137,7 @@ class Canvas extends Component {
             ref={(canvasDraw) => (this.loadableCanvas = canvasDraw)}
             saveData={localStorage.getItem("savedDrawing")}
           /> */}
-          <button onClick={() => this.canvasString()}>canvas</button>
+          {/* <button onClick={() => this.canvasString()}>canvas</button> */}
           <form>
             <label>
               caption:
@@ -159,6 +172,11 @@ class Canvas extends Component {
                 </div>
               </div>
             ))}
+            {/* <button
+              className="delete"
+              label="Delete"
+              onClick={(e) => this.handleDelete(canvasDraw._id, e)}
+            /> */}
           </div>
         </div>
       </div>
