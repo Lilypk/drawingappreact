@@ -15,11 +15,22 @@
 }
 .clear {
     color: #174328;
-     font-size: 30px;
+     font-size: 25px;
      cursor: pointer;
      border: none;
      text-decoration: none;
      background-color: transparent;
+}
+.save {
+    color: #174328;
+    font-size: 25px;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    background-color: transparent;
+}
+.save:hover {
+    background-color: white;
 }
 .clear:hover {
     background-color: white;

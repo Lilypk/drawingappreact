@@ -42,8 +42,6 @@ class Canvas extends Component {
   canvasString = (e) => {
     e.preventDefault();
     console.log(this.state.caption);
-    // let canvasSelector = document.querySelector("canvas").toDataURL();
-    // console.log(canvasSelector)
     console.log(localStorage.getItem("savedDrawing"))
     let canvasDrawing = {
       caption: this.state.caption,
@@ -73,23 +71,6 @@ class Canvas extends Component {
       .then((res) => res.json())
       .then((data) => console.log(data));
   };
-
-  // handleCanvasStoring = (e) => {
-  //   // e.preventDefault()
-  //   // console.log('here')
-  //   // let ctx = this.canvas.getContext('2d')
-  //   // let url = URL.createObjectURL(e.target.CanvasDraw)
-  //   // let img = new Image()
-
-  //   // img.src = url
-  //   // img.onload = function () {
-  //   //   console.log('!!!')
-  //   //   let dataImg = this.canvas.toDataURL()
-  //   //   console.log(dataImg)
-  //   //   ctx.drawImage(img, 0, 0, 600, 600, 0, 0, 200, 200)
-  //   }
-
-  // };
 
   render() {
     return (
@@ -132,15 +113,8 @@ class Canvas extends Component {
             brushRadius={this.state.brushRadius}
             lazyRadius={this.state.lazyRadius}
           />
-
-          {/* <CanvasDraw
-            id="myCanvas"
-            disabled
-            hideGrid
-            ref={(canvasDraw) => (this.loadableCanvas = canvasDraw)}
-            saveData={localStorage.getItem("savedDrawing")}
-          /> */}
        <button
+       className='save'
             onClick={() => {
               localStorage.setItem(
                 "savedDrawing",
@@ -181,7 +155,6 @@ class Canvas extends Component {
                     ref={(canvasDraw) => (this.loadableCanvas = canvasDraw)}
                     saveData={drawing.drawing}
                   />
-                  {/* <img className='imageDiv' src= {drawing.drawing} /> */}
                 </div>
               </div>
             ))}

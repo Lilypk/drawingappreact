@@ -21,7 +21,6 @@ class Feed extends Component {
       <div className='feedprofile'><Link to = '/user'>profile</Link></div>
       <div className='finishedcanvas'>
       
-           <div>caption</div>
           </div>
          
       <div className='logout'><Link to = '/'>logout</Link></div>
