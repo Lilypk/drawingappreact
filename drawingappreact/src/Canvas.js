@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./Canvas.css";
 import ReactDOM from "react-dom";
 import CanvasDraw from "react-canvas-draw";
-import tree from "./images/tree.jpeg";
+
+
 class Canvas extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +28,11 @@ class Canvas extends Component {
       .then((res) => res.json())
       .then((data) => {
         console.log(data)
+        
+        for (let i=0; i < data.length; i++) {
+          console.log(data[i])
+            data[i]=JSON.parse(JSON.stringify(data[i]))
+        }
         this.setState({ drawings: data })
       })
       
@@ -36,23 +42,23 @@ class Canvas extends Component {
   canvasString = (e) => {
     e.preventDefault();
     console.log(this.state.caption);
-    let canvasSelector = document.querySelector("canvas")
-    console.log(canvasSelector)
-    // let canvasDrawing = {
-    //   caption: this.state.caption,
-    //   drawing: canvasSelector,
-    // };
-    // // console.log(document.querySelector('canvas'))
-    // fetch("https://drawingapp-capstone.herokuapp.com/canvas", {
-    //   method: "POST",
-    //   body: JSON.stringify(canvasDrawing),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data));
+    // let canvasSelector = document.querySelector("canvas").toDataURL();
+    // console.log(canvasSelector)
+    console.log(localStorage.getItem("savedDrawing"))
+    let canvasDrawing = {
+      caption: this.state.caption,
+      drawing: this.saveableCanvas.getSaveData(),
+    };
+    fetch("https://drawingapp-capstone.herokuapp.com/canvas", {
+      method: "POST",
+      body: JSON.stringify(canvasDrawing),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   handleDelete = (_id, e) => {
@@ -163,18 +169,19 @@ class Canvas extends Component {
               post
             </button>
           </form>
+         
           <div>
             {this.state.drawings.map((drawing, i) => (
               <div key={i}>
                 <h1>caption: </h1> {drawing.caption}
                 <div>
-                  {/* <CanvasDraw
+                  <CanvasDraw
                     disabled
                     hideGrid
                     ref={(canvasDraw) => (this.loadableCanvas = canvasDraw)}
-                    saveData={localStorage.getItem("savedDrawing")}
-                  /> */}
-                  <img className='imageDiv' src= {drawing.drawing} />
+                    saveData={drawing.drawing}
+                  />
+                  {/* <img className='imageDiv' src= {drawing.drawing} /> */}
                 </div>
               </div>
             ))}
