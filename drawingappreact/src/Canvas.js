@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Canvas.css";
 import ReactDOM from "react-dom";
 import CanvasDraw from "react-canvas-draw";
-
+import {Link} from 'react-router-dom'
 
 class Canvas extends Component {
   constructor(props) {
@@ -75,7 +75,7 @@ class Canvas extends Component {
   render() {
     return (
       <div>
-        <div className="logo">DAYDOODLE</div>
+        <div className="logo"><Link to = '/'>DAYDOODLE</Link></div>
 
         <div className="canvas">
           <div>
